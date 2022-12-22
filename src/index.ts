@@ -5,6 +5,8 @@ import { AppDataSource } from "./config/data-source";
 import status from "./routes/status";
 import service from "./routes/service";
 import budget from "./routes/budget";
+import auth from "./routes/auth";
+import { isAuthenticated } from "./middlewares/authentication";
 
 AppDataSource.initialize()
   .then(() => {
@@ -16,9 +18,10 @@ AppDataSource.initialize()
         extended: true,
       })
     );
-    app.use("/api/v1/status", status);
-    app.use("/api/v1/service", service);
-    app.use("/api/v1/budget", budget);
+    app.use("/api/v1/status", isAuthenticated, status);
+    app.use("/api/v1/service", isAuthenticated, service);
+    app.use("/api/v1/budget", isAuthenticated, budget);
+    app.use("/api/v1/auth", auth);
 
     app.listen(3333, () => {
       console.log("init server");
