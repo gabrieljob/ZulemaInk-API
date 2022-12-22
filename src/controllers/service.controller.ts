@@ -9,7 +9,7 @@ export const getAllServices = async (req: Request, res: Response) => {
     return res.json(await getAll());
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao buscar serviço");
+    return res.status(500).json({ error: "Erro ao buscar serviços" });
   }
 };
 
@@ -20,14 +20,14 @@ export const getServiceById = async (req: Request, res: Response) => {
     const service = await getById(req.params.id);
 
     if (!service.length)
-      return res.json({
+      return res.status(500).json({
         message: "Nenhuma service encontrada com o Id solicitado",
       });
 
     return res.json(service[0]);
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao buscar serviço");
+    return res.status(500).json({ error: "Erro ao buscar serviço" });
   }
 };
 
@@ -35,10 +35,12 @@ export const createService = async (req: Request, res: Response) => {
   try {
     const { create } = useCrud("service");
 
-    return res.json(await create<ServiceTypes>({ label: req.body.label }));
+    return res
+      .status(500)
+      .json(await create<ServiceTypes>({ label: req.body.label }));
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao criar serviço");
+    return res.status(500).json({ error: "Erro ao criar serviço" });
   }
 };
 
@@ -54,7 +56,7 @@ export const updateService = async (req: Request, res: Response) => {
     );
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao atualizar serviço");
+    return res.status(500).json({ error: "Erro ao atualizar serviço" });
   }
 };
 
@@ -67,6 +69,6 @@ export const deleteService = async (req: Request, res: Response) => {
     return res.json(await deleteById(req.params.id));
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao excluir serviço");
+    return res.status(500).json({ error: "Erro ao excluir serviço" });
   }
 };

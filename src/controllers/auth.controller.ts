@@ -10,7 +10,7 @@ export const authenticate = async (req: Request, res: Response) => {
       user !== process.env.AUTH_USERNAME ||
       password !== process.env.AUTH_PASSWORD
     ) {
-      throw Error("Usuário ou senha inválidos");
+      return console.error("Usuário ou senha inválidos");
     }
 
     const token = jwt.sign({ user, password }, process.env.SECRET as string, {
@@ -20,7 +20,7 @@ export const authenticate = async (req: Request, res: Response) => {
     return res.json({ user, password, token });
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao buscar usuário");
+    return res.status(500).json({ error: "Usuário ou senha inválidos" });
   }
 };
 
@@ -34,6 +34,6 @@ export const verifyToken = async (req: Request, res: Response) => {
     return res.json(isValid);
   } catch (error) {
     console.error(error);
-    throw Error("Erro ao validar token");
+    return res.status(500).json({ error: "Erro ao validar token" });
   }
 };

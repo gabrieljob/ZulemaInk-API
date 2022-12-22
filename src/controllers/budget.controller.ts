@@ -26,7 +26,7 @@ export const getAllBudgets = async (req: Request, res: Response) => {
     return res.json(await getAll());
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao buscar orçamentos");
+    return res.status(500).json({ error: "Erro ao buscar orçamentos" });
   }
 };
 
@@ -37,14 +37,14 @@ export const getBudgetById = async (req: Request, res: Response) => {
     const service = await getById(req.params.id);
 
     if (!service.length)
-      return res.json({
+      return res.status(500).json({
         message: "Nenhum orçamento encontrada com o Id solicitado",
       });
 
     return res.json(service[0]);
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao buscar orçamento");
+    return res.status(500).json({ error: "Erro ao buscar orçamento" });
   }
 };
 
@@ -98,7 +98,7 @@ export const updateBudget = async (req: Request, res: Response) => {
     return res.json(await update(req.body.id, data));
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao atualizar orçamento");
+    return res.status(500).json({ error: "Erro ao atualizar orçamento" });
   }
 };
 
@@ -109,6 +109,6 @@ export const deleteBudget = async (req: Request, res: Response) => {
     return res.json(await deleteById(req.params.id));
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao excluir orçamento");
+    return res.status(500).json({ error: "Erro ao excluir orçamento" });
   }
 };

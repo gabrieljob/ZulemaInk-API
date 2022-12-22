@@ -10,7 +10,7 @@ export const getAllSituations = async (req: Request, res: Response) => {
     return res.json(await getAll());
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao buscar situações");
+    return res.status(500).json({ error: "Erro ao buscar situações" });
   }
 };
 
@@ -21,14 +21,14 @@ export const getSituationById = async (req: Request, res: Response) => {
     const status = await getById(req.params.id);
 
     if (!status.length)
-      return res.json({
+      return res.status(500).json({
         message: "Nenhuma situação encontrada com o Id solicitado",
       });
 
     return res.json(status[0]);
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao buscar situação");
+    return res.status(500).json({ error: "Erro ao buscar situação" });
   }
 };
 
@@ -45,7 +45,7 @@ export const createSituation = async (req: Request, res: Response) => {
     );
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao criar situações");
+    return res.status(500).json({ error: "Erro ao criar situações" });
   }
 };
 
@@ -62,7 +62,7 @@ export const updateSituation = async (req: Request, res: Response) => {
     );
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao atualizar situação");
+    return res.status(500).json({ error: "Erro ao atualizar situação" });
   }
 };
 
@@ -75,6 +75,6 @@ export const deleteSituation = async (req: Request, res: Response) => {
     return res.json(await deleteById(req.params.id));
   } catch (error: any) {
     console.error(error);
-    throw Error("Erro ao excluir situação");
+    return res.status(500).json({ error: "Erro ao excluir situação" });
   }
 };

@@ -12,11 +12,12 @@ export const isAuthenticated = async (
     const token = authorization.replace("Bearer ", "");
 
     const isValid = jwt.verify(token, process.env.SECRET as string);
-    if (!isValid) throw Error("Erro ao validar token");
+    if (!isValid)
+      return res.status(500).json({ error: "Erro ao validar token" });
 
     next();
   } catch (error) {
     console.error(error);
-    throw Error("Erro ao validar token");
+    return res.status(500).json({ error: "Erro ao validar token" });
   }
 };
