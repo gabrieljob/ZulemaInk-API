@@ -2,8 +2,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { AppDataSource } from "./config/data-source";
-import status from "./routes/status";
-import service from "./routes/service";
 import budget from "./routes/budget";
 import auth from "./routes/auth";
 import { isAuthenticated } from "./middlewares/authentication";
@@ -18,8 +16,6 @@ AppDataSource.initialize()
         extended: true,
       })
     );
-    app.use("/api/v1/status", isAuthenticated, status);
-    app.use("/api/v1/service", isAuthenticated, service);
     app.use("/api/v1/budget", isAuthenticated, budget);
     app.use("/api/v1/auth", auth);
 

@@ -3,15 +3,13 @@ import useCrud from "../hooks/useCrud";
 
 const fields: any = [
   "client_name",
-  "phone",
-  "email",
   "whatsapp",
   "instagram",
   "schedule_date",
   "schedule_hour",
   "service_id",
   "status_id",
-  "payment",
+  "payment_id",
   "price",
   "created_date",
   "is_from_web",

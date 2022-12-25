@@ -9,10 +9,7 @@ export class Budget extends BaseEntity {
   client_name: string;
 
   @Column("text")
-  phone: string;
-
-  @Column("text")
-  email: string;
+  gender: string;
 
   @Column("text")
   instagram: string;
@@ -21,7 +18,13 @@ export class Budget extends BaseEntity {
   whatsapp: string;
 
   @Column("text")
+  created_date: string;
+
+  @Column("text")
   schedule_date: string;
+
+  @Column("text")
+  schedule_hour: string;
 
   @Column("text")
   service_id: string;
@@ -30,23 +33,14 @@ export class Budget extends BaseEntity {
   status_id: string;
 
   @Column("text")
-  payment: string;
+  payment_id: string;
 
   @Column("text")
   price: string;
-
-  @Column("text")
-  created_date: string;
 
   @Column("text")
   is_from_web: string;
 
   @Column("longtext")
   description: string;
-
-  @Column("text")
-  schedule_hour: string;
-
-  @Column("text")
-  gender: string;
 }
