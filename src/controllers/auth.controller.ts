@@ -14,7 +14,7 @@ export const authenticate = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign({ user, password }, process.env.SECRET as string, {
-      expiresIn: "365d",
+      expiresIn: "1d",
     });
 
     return res.json({ user, password, token });
@@ -26,9 +26,7 @@ export const authenticate = async (req: Request, res: Response) => {
 
 export const verifyToken = async (req: Request, res: Response) => {
   try {
-    const authorization: string = req.headers.authorization!;
-    const token = authorization.replace("Bearer ", "");
-
+    const token = req.headers.authorization!.split(" ")[1];
     const isValid = jwt.verify(token, process.env.SECRET as string);
 
     return res.json(isValid);

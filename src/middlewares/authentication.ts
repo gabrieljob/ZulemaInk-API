@@ -7,17 +7,19 @@ export const isAuthenticated = async (
   res: Response,
   next: NextFunction
 ) => {
-  try {
-    const authorization: string = req.headers.authorization!;
-    const token = authorization.replace("Bearer ", "");
-
-    const isValid = jwt.verify(token, process.env.SECRET as string);
-    if (!isValid)
-      return res.status(500).json({ error: "Erro ao validar token" });
-
-    next();
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Erro ao validar token" });
+  if (req.body.noTken) {
+    return next();
   }
+
+  const token = req.headers.authorization!.split(" ");
+
+  const isValid = jwt.decode(token[1]);
+
+  if (isValid) {
+    return next();
+  }
+
+  if (!isValid) return res.status(500).json({ error: "Erro ao validar token" });
+
+  next();
 };

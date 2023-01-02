@@ -8,7 +8,7 @@ const Config: DataSourceOptions = {
   host: "localhost",
   port: 3306,
   username: "root",
-  password: "root",
+  password: "I@4vq5qp",
   database: "zulemaink_refactor",
   entities: [Budget],
   migrations: [__dirname + "/../migrations/*{.ts,.js}"],
