@@ -10,7 +10,11 @@ import { isAuthenticated } from "./middlewares/authentication";
 AppDataSource.initialize()
   .then(() => {
     const app = express();
-    app.use(cors());
+    app.use(
+      cors({
+        origin: "*",
+      })
+    );
     app.use(express.json());
     app.use(
       bodyParser.urlencoded({
