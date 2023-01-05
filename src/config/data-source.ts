@@ -7,7 +7,7 @@ import { Budget } from "../models/budget.entity";
 const Config: DataSourceOptions = {
   type: "mysql",
   host: process.env.SERVER_HOST,
-  port: process.env.SERVER_PORT,
+  port: parseInt(process.env.SERVER_PORT as string),
   username: process.env.SERVER_USERNAME,
   password: process.env.SERVER_PASSWORD,
   database: process.env.SERVER_DATABASE,
