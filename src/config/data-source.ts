@@ -1,3 +1,4 @@
+require("dotenv").config();
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
@@ -5,11 +6,11 @@ import { Budget } from "../models/budget.entity";
 
 const Config: DataSourceOptions = {
   type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "I@4vq5qp",
-  database: "zulemaink_refactor",
+  host: process.env.SERVER_HOST,
+  port: process.env.SERVER_PORT,
+  username: process.env.SERVER_USERNAME,
+  password: process.env.SERVER_PASSWORD,
+  database: process.env.SERVER_DATABASE,
   entities: [Budget],
   migrations: [__dirname + "/../migrations/*{.ts,.js}"],
   synchronize: false,
