@@ -12,7 +12,7 @@ AppDataSource.initialize()
     const app = express();
     app.use(
       cors({
-        origin: "https://zulemaink.com/",
+        origin: "*",
       })
     );
     app.use(express.json());
