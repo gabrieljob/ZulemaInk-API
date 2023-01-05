@@ -17,6 +17,11 @@ export const authenticate = async (req: Request, res: Response) => {
       expiresIn: "1d",
     });
 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     return res.json({ user, password, token });
   } catch (error: any) {
     console.error(error);
